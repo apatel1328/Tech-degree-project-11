@@ -2,26 +2,25 @@ import React from 'react';
 import Search from './Search.js';
 import Navigation from './Navigation.js';
 import Photocontainer from './Photocontainer.js';
-import PropTypes from 'prop-types';
-import APIKey from '../config.js';
-import {BrowserRouter, Route, Redirect, Switch, Render} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
 
 
 
 const Container = (props) => 
 
-	<BrowserRouter>
+// Render search input - pass search component performSearch function / navigation / and photo container
+
+
 		<div className="container">
 
-			<Route path="/search" render={(props) => (<Search onSearch={props.onSearch} /> )} />
+			<Route path="/search" render={() => (<Search onSearch={props.onSearch} /> )} />
 
 			<Navigation />
 
-			<Photocontainer title={props.title} searchGif={props.searchGif}/>
+			<Photocontainer title={props.title} onSearch={props.onSearch} searchGif={props.searchGif}/>
 
 		</div>
-	</BrowserRouter>
 
 
 export default Container;

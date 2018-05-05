@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 
-const Nomatch = (props) =>
+const Nomatch = () =>
+
+// Functional component to be rendered if search does not yield results 
 
 	<ul>
 		<li className="not-found">

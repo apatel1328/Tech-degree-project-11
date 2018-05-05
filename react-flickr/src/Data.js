@@ -1,52 +1,47 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
 import Gif from './components/Gif.js';
-import APIKey from './config.js';
+import Nomatch from './components/Nomatch.js';
 
 
 
 export default class Query extends React.Component {
 
-	constructor(props){
-		super();
-		this.state = {
-			gifs: [],
-		};
-	}
-
+// performSearch on component mount
 
 	componentDidMount(props) {
 
-		axios.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + APIKey + "&text=" + this.props.search + "&privacy_filter=1&media=photos&per_page=20&format=json&nojsoncallback=1")
-		.then(response => {
-			this.setState({
-				gifs: response.data.photos.photo
-			})
-
-		})
-		.catch(error => {
-			console.log('error uploading', error)
-		});
+		this.props.onSearch(this.props.term)
 
 	}
 
+// build individual image urls through interpolation and pass to Gif component
+
+	renderGif = (gif) => <Gif url={"https://farm" + gif.farm + ".staticflickr.com/" + gif.server + "/" + gif.id + "_" + gif.secret + ".jpg"} key={gif.id} /> 
+
+// identify if search yielded a return if not then render Nomatch component
 
 	render(props) {
+		if(this.props.gif.length > 0) {
+
+			return (
+				
+				<div>
+					<h2>{this.props.title} Gifs</h2>
+
+					<ul>
+						{this.props.gif.map(this.renderGif)}
+					</ul>
+				</div>
+			);
+
+		}
+
+			return (
+				
+					<Nomatch />
+
+			);
 		
-		const photos = this.state.gifs;
-		let searchPhotos = photos.map(gif => {
-			return <Gif url={"https://farm" + gif.farm + ".staticflickr.com/" + gif.server + "/" + gif.id + "_" + gif.secret + ".jpg"} key={gif.id} />
-		});
-		console.log(photos)
-
-		return (
-
-			<ul>
-				{searchPhotos}
-			</ul>
-			
-		);
 	}
 
 }

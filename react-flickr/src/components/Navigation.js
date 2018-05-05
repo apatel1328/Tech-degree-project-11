@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import {NavLink} from 'react-router-dom';
 
-
-const Navigation = (props) =>
+const Navigation = () =>
 
 	<nav className="main-nav">
 		<ul>
-			<li><a href='/cats'>Cats</a></li>
-			<li><a href='/dogs'>Dogs</a></li>
-			<li><a href='/birds'>Birds</a></li>
-			<li><a href='/search'>Search</a></li>
+			<li><NavLink to='/cats'>Cats</NavLink></li>
+			<li><NavLink to='/dogs'>Dogs</NavLink></li>
+			<li><NavLink to='/birds'>Birds</NavLink></li>
+			<li><NavLink to='/search'>Search</NavLink></li>
 		</ul>
 	</nav>
 

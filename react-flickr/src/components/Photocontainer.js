@@ -1,46 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Redirect, Switch, Render} from 'react-router-dom';
-import Cats from './Cats.js';
-import Dogs from './Dogs.js';
-import Birds from './Birds.js';
-import Nomatch from './Nomatch.js';
-import Gif from './Gif.js';
+import {Route} from 'react-router-dom';
 import Query from '../Data.js';
 
 
 
 const Photocontainer = (props) => 
 
-
-	<BrowserRouter>
+// Use React-router Switch and render Query component passing search term / performSearch function and / Gif state
 		<div className="photo-container">
-			<h2>{props.title}</h2>
 			
-				<Switch>
+			
 				
-				<Route exact path="/" render={(props) => (<Query search="random" />)} />
-				<Route path="/cats" render={(props) => (<Query search="cat" />)} />
-				<Route path="/dogs" render={(props) => (<Query search="dog" />)}  />
-				<Route path="/birds" render={(props) => (<Query search="bird" />)}  />
-				<Route path="/search" render={(props) => (<Query search={props.searchGif} />)}  />
+				<Route exact path="/" render={() => (<Query title={props.title} term="random" gif={props.searchGif} onSearch={props.onSearch}/>)} />
+				<Route path="/cats" render={() => (<Query title={props.title} term="cat" gif={props.searchGif} onSearch={props.onSearch}/>)} />
+				<Route path="/dogs" render={() => (<Query title={props.title} term="dog" gif={props.searchGif} onSearch={props.onSearch}/>)}  />
+				<Route path="/birds" render={() => (<Query title={props.title} term="bird" gif={props.searchGif} onSearch={props.onSearch}/>)}  />
+				<Route path="/search" render={() => (<Query title={props.title} term={props.searchGif} gif={props.searchGif} onSearch={props.onSearch}/>)}  />
 
 				
 
-				</Switch>
 			
 		</div>
-	</BrowserRouter>
 
-
-Photocontainer.propTypes = {
-	title: PropTypes.string,
-};
-
-
-Photocontainer.defaultProps = {
-	title: "Results",
-}
 
 
 export default Photocontainer;
